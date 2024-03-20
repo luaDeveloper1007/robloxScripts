@@ -7,3 +7,13 @@ end)
 
 _G.SpeedHubX_FruitFinder = true
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/SpeedHubX", true))()
+
+wait(25) -- There is a chance that there is a glitched fruit that can't be picked up so the script can't continue. This bypasses that.
+
+for loopAmount, newChild in pairs(workspace:GetChildren()) do
+   pcall(function()
+      if newChild ~= playerService.LocalPlayer.Character then
+         newChild:Destroy()
+      end
+   end)
+end
