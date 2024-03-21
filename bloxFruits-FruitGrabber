@@ -6,15 +6,8 @@ playerService.LocalPlayer.OnTeleport:Connect(function(State)
 end)
 
 spawn(function()
-   wait(25) -- There is a chance that there is a glitched fruit that can't be picked up so the script can't continue. This bypasses that.
-
-   for loopAmount, newChild in pairs(workspace:GetChildren()) do
-      pcall(function()
-         if newChild ~= playerService.LocalPlayer.Character then
-            newChild:Destroy()
-         end
-      end)
-   end
+   wait(40) -- There is a chance that there is a glitched fruit that can't be picked up so the script can't continue. This bypasses that.
+   game:GetService("TeleportService"):Teleport(game.PlaceId)
 end)
 
 _G.SpeedHubX_FruitFinder = true
