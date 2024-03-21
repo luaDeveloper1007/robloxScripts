@@ -1,14 +1,22 @@
-local serverHopQueue = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
+local serverHopQueue = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport) -- Used for server hopping.
+local runService = game:GetService("RunService")
 local playerService = game:GetService("Players")
 
-playerService.LocalPlayer.OnTeleport:Connect(function(State)
+pcall(function() -- Disables rendering for better FPS and faster fruit grinding.
+	runService:Set3dRenderingEnabled(false)
+	runService:setThrottleFramerateEnabled(true)
+	pcall(setsimulationradius(0,0))
+	settings().Rendering.QualityLevel = 1
+end)
+
+playerService.LocalPlayer.OnTeleport:Connect(function(State) -- Automatically run the script again after server hopping.
    serverHopQueue("loadstring(game:HttpGet('https://raw.githubusercontent.com/luaDeveloper1007/robloxScripts/main/bloxFruits-FruitGrabber', true))()")
 end)
 
-spawn(function()
-   wait(60) -- There is a chance that there is a glitched fruit that can't be picked up so the script can't continue. This bypasses that.
+spawn(function() -- There is a chance that there is a glitched fruit that can't be picked up so the script can't continue. This bypasses that.
+   wait(60)
    game:GetService("TeleportService"):Teleport(game.PlaceId)
 end)
 
-_G.SpeedHubX_FruitFinder = true
+_G.SpeedHubX_FruitFinder = true -- Fruit grabber script, not made by me.
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/SpeedHubX", true))()
