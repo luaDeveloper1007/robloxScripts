@@ -50,4 +50,4 @@ end
 
 wait(3)
 
-game:GetService("TeleportService"):TeleportAsync(game.PlaceId)
+game:GetService("TeleportService"):TeleportAsync(game.PlaceId, localPlayer)
