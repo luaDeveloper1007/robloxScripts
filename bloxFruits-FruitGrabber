@@ -1,22 +1,44 @@
 local serverHopQueue = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport) -- Used for server hopping.
+local replicatedStorage = game:GetService("ReplicatedStorage")
 local runService = game:GetService("RunService")
 local playerService = game:GetService("Players")
+local localPlayer = playerService.LocalPlayer
+local localCharacter = localPlayer.Character
+local rootPart = localCharacter.HumanoidRootPart
 
-pcall(function() -- Disables rendering for better FPS and faster fruit grinding.
+--[[pcall(function() -- Disables rendering for better FPS and faster fruit grinding.
 	runService:Set3dRenderingEnabled(false)
 	runService:setThrottleFramerateEnabled(true)
 	pcall(setsimulationradius(0,0))
 	settings().Rendering.QualityLevel = 1
-end)
+end)]]
 
 playerService.LocalPlayer.OnTeleport:Connect(function(State) -- Automatically run the script again after server hopping.
    serverHopQueue("loadstring(game:HttpGet('https://raw.githubusercontent.com/luaDeveloper1007/robloxScripts/main/bloxFruits-FruitGrabber', true))()")
 end)
 
 spawn(function() -- There is a chance that there is a glitched fruit that can't be picked up so the script can't continue. This bypasses that.
-   wait(60)
-   game:GetService("TeleportService"):Teleport(game.PlaceId)
+   wait(45)
+   game:GetService("TeleportService"):TeleportAsync(game.PlaceId)
 end)
 
-_G.SpeedHubX_FruitFinder = true -- Fruit grabber script, not made by me.
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/SpeedHubX", true))()
+for loopAmount, newChild in pairs(workspace:GetChildren()) do -- Grabs all fruits in the server.
+   if newChild:FindFirstChild("Handle") and not newChild:FindFirstChildOfClass("Humanoid") then
+      rootPart.CFrame = newChild.Handle.CFrame
+      wait(1)
+      pcall(function()
+         local holdingFruit = localCharacter:FindFirstChildOfClass("Tool")
+         local invokeArguments = {
+            [1] = "StoreFruit",
+            [2] = (holdingFruit.Name:gsub("Fruit", "").."-"..holdingFruit.Name:gsub("Fruit", "")):gsub(" ", ""),
+            [3] = holdingFruit
+         }
+         replicatedStorage:WaitForChild("Remotes"):WaitForChild("CommF_"):InvokeServer(unpack(invokeArguments))
+      end)
+      wait(1)
+   end
+end
+
+wait(1)
+
+game:GetService("TeleportService"):TeleportAsync(game.PlaceId)
