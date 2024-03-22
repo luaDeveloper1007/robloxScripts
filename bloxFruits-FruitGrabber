@@ -13,6 +13,15 @@ local rootPart = localCharacter.HumanoidRootPart
 	settings().Rendering.QualityLevel = 1
 end)]]
 
+local invokeArguments = {
+    [1] = "SetTeam",
+    [2] = "Pirates"
+}
+
+replicatedStorage:WaitForChild("Remotes"):WaitForChild("CommF_"):InvokeServer(unpack(invokeArguments))
+
+wait(2)
+
 playerService.LocalPlayer.OnTeleport:Connect(function(State) -- Automatically run the script again after server hopping.
    serverHopQueue("loadstring(game:HttpGet('https://raw.githubusercontent.com/luaDeveloper1007/robloxScripts/main/bloxFruits-FruitGrabber', true))()")
 end)
