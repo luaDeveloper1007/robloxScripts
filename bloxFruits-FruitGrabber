@@ -28,7 +28,7 @@ end)
 
 spawn(function() -- There is a chance that there is a glitched fruit that can't be picked up so the script can't continue. This bypasses that.
    wait(45)
-   game:GetService("TeleportService"):TeleportAsync(game.PlaceId)
+   game:GetService("TeleportService"):Teleport(game.PlaceId)
 end)
 
 for loopAmount, newChild in pairs(workspace:GetChildren()) do -- Grabs all fruits in the server.
@@ -50,4 +50,4 @@ end
 
 wait(3)
 
-game:GetService("TeleportService"):TeleportAsync(game.PlaceId, localPlayer)
+game:GetService("TeleportService"):Teleport(game.PlaceId)
