@@ -25,7 +25,7 @@ end)
 for loopAmount, newChild in pairs(workspace:GetChildren()) do -- Grabs all fruits in the server.
    if newChild:FindFirstChild("Handle") and not newChild:FindFirstChildOfClass("Humanoid") then
       rootPart.CFrame = newChild.Handle.CFrame
-      wait(1)
+      wait(2)
       pcall(function()
          local holdingFruit = localCharacter:FindFirstChildOfClass("Tool")
          local invokeArguments = {
@@ -35,10 +35,10 @@ for loopAmount, newChild in pairs(workspace:GetChildren()) do -- Grabs all fruit
          }
          replicatedStorage:WaitForChild("Remotes"):WaitForChild("CommF_"):InvokeServer(unpack(invokeArguments))
       end)
-      wait(1)
+      wait(2)
    end
 end
 
-wait(1)
+wait(3)
 
 game:GetService("TeleportService"):TeleportAsync(game.PlaceId)
