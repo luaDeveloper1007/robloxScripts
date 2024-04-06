@@ -5,7 +5,7 @@ local playerService = game:GetService("Players")
 runService:Set3dRenderingEnabled(false)
 
 playerService.LocalPlayer.OnTeleport:Connect(function(State) -- Automatically run the script again after server hopping.
-   serverHopQueue("loadstring(game:HttpGet('https://raw.githubusercontent.com/luaDeveloper1007/robloxScripts/main/bloxFruits-FruitGrabber', true))()")
+   serverHopQueue("wait(0.5) loadstring(game:HttpGet('https://raw.githubusercontent.com/luaDeveloper1007/robloxScripts/main/bloxFruits-FruitGrabber', true))()")
 end)
 
 spawn(function() -- There is a chance that there is a glitched fruit that can't be picked up so the script can't continue. This bypasses that.
