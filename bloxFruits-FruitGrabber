@@ -7,7 +7,7 @@ playerService.LocalPlayer.OnTeleport:Connect(function(State) -- Automatically ru
 end)
 
 spawn(function() -- There is a chance that there is a glitched fruit that can't be picked up so the script can't continue. This bypasses that.
-   wait(50)
+   wait(80)
    game:GetService("TeleportService"):Teleport(game.PlaceId)
 end)
 
