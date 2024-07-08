@@ -1,1 +1,3 @@
-const isThisReal = 40000000000012903
+function ffa() {
+    return "Mundo!";
+}
