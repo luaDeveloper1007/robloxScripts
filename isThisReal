@@ -1,3 +1,3 @@
-function ffa() {
+function worldInSpanish() {
     return "Mundo!";
 }
