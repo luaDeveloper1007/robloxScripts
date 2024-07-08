@@ -1,2 +1,1 @@
-var isThisReal = 40000000000012903
-alert(1)
+const isThisReal = 40000000000012903
